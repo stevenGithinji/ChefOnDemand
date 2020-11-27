@@ -61,13 +61,13 @@ public class ChefOnCall extends Application {
         Text welcomeTxt = new Text("Chef On Demand");
         welcomeTxt.setFont(Font.font("Tahoma", FontWeight.LIGHT, 20));
         grid.add(welcomeTxt, 0, 0);
+        
+        Label lblid = new Label("Client id");
+        grid.add(lblid, 0, 1);
 
-        Label lblUser = new Label("Username");
-        grid.add(lblUser, 0, 1);
-
-        TextField txtUser = new TextField();
-        txtUser.setPromptText("Username");
-        grid.add(txtUser, 1, 1);
+        TextField txtid = new TextField();
+        txtid.setPromptText("Client id");
+        grid.add(txtid, 1, 1);
 
         Label lblPassword = new Label("Password");
         grid.add(lblPassword, 0, 2);
@@ -81,13 +81,15 @@ public class ChefOnCall extends Application {
         loginBtn.setOnAction(e -> {
 
             PreparedStatement ps;
-            String uname = lblUser.getText();
+            String id = lblid.getText();
             String pass = pwBox.getText();
             String Try="t";
 
-            String query = "SELECT * FROM user_details WHERE username ='" + uname + "' AND password ='" + pass + "'";
+            String query = "SELECT * FROM client WHERE client_id ='" + id + "' AND client_password ='" + pass + "'";
 
 
+
+        
                 try {
                 ps = DataConnection.getConnection().prepareStatement(query);
                     ResultSet rs = ps.executeQuery();
