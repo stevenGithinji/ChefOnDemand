@@ -155,73 +155,76 @@ public class ChefOnCall extends Application {
             Text welcomeTxt = new Text("Signup Please");
             welcomeTxt.setFont(Font.font("Tahoma", FontWeight.LIGHT, 25));
             grid.add(welcomeTxt, 0, 0);
+            Label lblid = new Label("Client id");
+            grid.add(lblid, 0, 1);
 
-            Label lblUser = new Label("Username");
-            grid.add(lblUser, 0, 1);
-
-            TextField txtUser = new TextField();
-            txtUser.setPromptText("Username");
-            grid.add(txtUser, 1, 1);
-
-
-            Label lblFname = new Label("First Name");
-            grid.add(lblFname, 0, 2);
-
-            TextField txtFname = new TextField();
-            txtUser.setPromptText("First Name");
-            grid.add(txtFname, 1, 2);
+            TextField txtid = new TextField();
+            txtid.setPromptText("Client id");
+            grid.add(txtid, 1, 1);
 
 
-            Label lblLname = new Label("Last name");
-            grid.add(lblLname, 0, 3);
+            Label lblname = new Label("Client Name");
+            grid.add(lblname, 0, 2);
 
-            TextField txtLname = new TextField();
-            txtUser.setPromptText("Last Name");
-            grid.add(txtLname, 1, 3);
+            TextField txtname = new TextField();
+            txtid.setPromptText("Client Name");
+            grid.add(txtname, 1, 2);
 
-            Label lblEmail = new Label("Email");
-            grid.add(lblEmail, 0, 4);
+
+            Label lblEmail = new Label("Client Email");
+            grid.add(lblEmail, 0, 3);
 
             TextField txtEmail = new TextField();
-            txtEmail.setPromptText("Email");
-            grid.add(txtEmail, 1, 4);
+            txtid.setPromptText("Client Email");
+            grid.add(txtEmail, 1, 3);
 
-            Label lblPassword = new Label("Password");
-            grid.add(lblPassword, 0, 5);
+            Label lblPassword = new Label("Client Password");
+            grid.add(lblPassword, 0, 4);
 
             PasswordField pwBox = new PasswordField();
-            pwBox.setPromptText("Password");
-            grid.add(pwBox, 1, 5);
+            pwBox.setPromptText("Client Password");
+            grid.add(pwBox, 1, 4);
+            
+            Label lblphone= new Label("Client Number");
+            txtid.setPromptText("Client Number");
+            grid.add(lblphone, 0, 5);
+            
+             TextField txtphone = new TextField();
+            txtid.setPromptText("Client Number");
+            grid.add(txtEmail, 1, 5);
 
 
             Button SignupBtn = new Button("Signup");
             SignupBtn.setOnAction((ActionEvent event) -> {
-                String username=txtUser.getText();
-                String fname=txtFname.getText();
-                String lname=txtLname.getText();
-                String email=txtEmail.getText();
+                
+                String id=txtid.getText();
+                String name=txtname.getText();
+                String Email=txtEmail.getText();
                 String pass=pwBox.getText();
+                String phone=txtphone.getText();
 
                 PreparedStatement ps;
-                String query="INSERT INTO 'user_details'('username','first_name','last_name','email','password') VALUES(?,?,?,?,?)";
+                String query="INSERT INTO 'client'('client_id','client_name','client_email','password',client_phone) VALUES(?,?,?,?,?)";
 
                 try {
 
 
                         ps = DataConnection.getConnection().prepareStatement(query);
 
-                        ps.setString(1, username);
-                        ps.setString(2, fname);
-                        ps.setString(3, lname);
-                        ps.setString(4, email);
-                        ps.setString(5, pass);
+                        ps.setString(1, id);
+                        ps.setString(2, name);
+                        ps.setString(3, Email);
+                        ps.setString(4, pass);
+                        ps.setString(5, phone);
 
 
                     } catch (SQLException ex) {
                         Logger.getLogger(Signup.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                        if(!txtUser.getText().trim().isEmpty()&&!txtFname.getText().trim().isEmpty()&&!txtLname.getText().trim().isEmpty()&&!txtEmail.getText().trim().isEmpty()&&!pwBox.getText().trim().isEmpty()) {
+                        if(!txtid.getText().trim().isEmpty()&&!txtname.getText().trim().isEmpty()&&!txtEmail.getText().trim().isEmpty()&&!txtphone.getText().trim().isEmpty()&&!pwBox.getText().trim().isEmpty()) {
 
+
+            
                             SignupBtn.setOnAction(e -> {
                                 authentication = new Authentication();
                                 try {
